@@ -1,22 +1,27 @@
+import { Score } from "./components/score";
+import { Board } from "./components/board";
+import { Tile } from "./components/tile";
+
+import "./styles/style.css";
+
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
-ctx.strokeStyle = "grey"; 
-ctx.lineWidth = 5;
+const score = new Score(ctx);
+const board = new Board(ctx);
+const tile = new Tile(ctx, 1);
+const tile1 = new Tile(ctx, 2);
+const tile2 = new Tile(ctx, 3);
+const tile3 = new Tile(ctx, 4);
 
-ctx.beginPath();
 
-const x = 100;
-const y = 10;
-const size = 200;
-const radius = 30;
+score.generationScore();
 
-ctx.moveTo(x + radius, y);
-ctx.lineTo(x, y);
-ctx.arc(295, y + radius, radius, 5, 7.7, false);
+board.generationBoard();
+board.generationGrid();
 
-ctx.lineTo(x, y + (radius * 2));
-ctx.arc(100, y + radius, radius, 8, 4.6, false);
+tile.generationTile();
+tile1.generationTile();
+tile2.generationTile();
+tile3.generationTile();
 
-ctx.closePath(); // Закрываем путь
-ctx.stroke(); 
