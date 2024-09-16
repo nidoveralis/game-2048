@@ -1,6 +1,7 @@
 export class Board {
-  constructor(ctx) {
+  constructor(ctx, arr) {
     this.ctx = ctx;
+    this.arr = arr;
     this.grid = Array(length = 4)
   }
 
@@ -15,13 +16,14 @@ export class Board {
     const radius = 30;
 
     this.ctx.moveTo(x + radius, y);
+
     this.ctx.lineTo(x, y);
-    this.ctx.arc(345, y + radius, radius, 4.7, 6, false);
+    this.ctx.arc(305, y + radius, radius, 4.7, 6, false);
 
-    this.ctx.lineTo(375, y + (radius * 1.5));
-    this.ctx.arc(345, 380, radius, 6.2, 1.5, false);
+    this.ctx.lineTo(335, y + (radius * 1.5));
+    this.ctx.arc(305, 380, radius, 6.2, 1.5, false);
 
-    this.ctx.lineTo(345, 410);
+    this.ctx.lineTo(305, 410);
     this.ctx.arc(x + 5, 380, radius, 8, 3, false);
 
     this.ctx.lineTo(x - 25, y + (radius * 2));
@@ -39,5 +41,21 @@ export class Board {
         emptyCells.push({ x: row, y: col, tile: 0 })
       }
     }
+
+    return emptyCells;
+  };
+
+  initTilesList(arr) {
+    const emptyCells = this.generationGrid();
+    console.log(arr);
+    // const newList = [];
+    for (const tile of arr) {
+      const [x, y] = tile;
+      const cell = emptyCells.find(cell => cell.x === x && cell.y === y);
+      if (cell) {
+        cell.tile = 2;
+      }
+    }
+    return emptyCells;
   }
 };
